@@ -10,7 +10,7 @@ const sections = [
 const Header = () => (
   <header className="bg-blue-900 text-white shadow-md sticky top-0 z-50">
     <div className="max-w-screen-lg mx-auto px-4 py-5 flex justify-between items-center">
-      <h1 className="text-2xl font-bold tracking-wide">TrustLaw</h1>
+      <h1 className="text-2xl font-bold tracking-wide">최길성 법무사 사무소</h1>
       <nav className="hidden md:flex space-x-6">
         {sections.map(({ id, label }) => (
           <a key={id} href={`#${id}`} className="hover:text-blue-300 transition-colors">
