@@ -7,13 +7,15 @@ const sections = [
   { id: 'location', label: '오시는 길' },
 ];
 
-const Header = () => (
+const Header = ({ scrollToSection }: { scrollToSection: (id: string) => void }) => (
   <header className="bg-blue-900 text-white shadow-md sticky top-0 z-50">
-    <div className="max-w-screen-lg mx-auto px-4 py-5 flex justify-between items-center">
-      <h1 className="text-2xl font-bold tracking-wide">최길성 법무사 사무소</h1>
+    <div className="max-w-screen-lg mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="flex items-center gap-2">
+        <img src="/logo_main.png" alt="최길성 법무사사무소" className="w-64 h-auto cursor-pointer" onClick={() => scrollToSection('home')} />
+      </div>
       <nav className="hidden md:flex space-x-6">
         {sections.map(({ id, label }) => (
-          <a key={id} href={`#${id}`} className="hover:text-blue-300 transition-colors">
+          <a key={id} href={`#${id}`} className="text-xl hover:text-blue-300 transition-colors">
             {label}
           </a>
         ))}
@@ -22,32 +24,37 @@ const Header = () => (
   </header>
 );
 
-const SectionNavigation = ({
-  activeSection,
-  scrollToSection,
-}: {
-  activeSection: string;
-  scrollToSection: (id: string) => void;
-}) => (
-  <nav className="flex justify-center flex-wrap gap-3 mb-10">
-    {sections.map(({ id, label }) => (
-      <button
-        key={id}
-        onClick={() => scrollToSection(id)}
-        className={`px-4 py-2 text-sm rounded-full border font-medium transition ${
-          activeSection === id
-            ? 'bg-blue-600 text-white border-blue-600'
-            : 'bg-white text-gray-800 border-gray-300 hover:bg-blue-100'
-        }`}
-      >
-        {label}
-      </button>
-    ))}
-  </nav>
+const Home = () => (
+  <section id="home" className="relative h-screen flex items-center">
+    <div className="absolute inset-0">
+      <img
+        src="/pic_home.png"
+        alt="메인 배경"
+        className="w-full h-full object-fill"
+      />
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+    </div>
+    <div className="relative w-full text-white text-center">
+      <h1 className="text-5xl md:text-6xl font-bold mb-6">
+        채무 해결 전문가
+      </h1>
+      <p className="text-xl md:text-2xl mb-8">
+        신뢰와 경험으로 당신의 채무 문제를 해결합니다
+      </p>
+      <div className="flex justify-center gap-4">
+        <button className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          상담 예약하기
+        </button>
+        <button className="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors">
+          상담 방법 알아보기
+        </button>
+      </div>
+    </div>
+  </section>
 );
 
 const QualificationSection = () => (
-  <section id="qualification" className="scroll-mt-24 mb-20">
+  <section id="qualification" className="scroll-mt-32 mb-20">
     <h2 className="text-3xl font-bold mb-8">회생/파산 신청자격</h2>
     <div className="bg-white rounded-lg shadow-lg p-8">
       <p className="text-lg text-gray-800 mb-6">
@@ -78,7 +85,7 @@ const QualificationSection = () => (
 );
 
 const ConsultSection = () => (
-  <section id="consult" className="scroll-mt-24 mb-20">
+  <section id="consult" className="scroll-mt-32 mb-20">
     <h2 className="text-3xl font-bold mb-8">상담안내</h2>
     <div className="bg-white rounded-lg shadow-lg p-8">
       <div className="grid md:grid-cols-2 gap-8">
@@ -105,7 +112,7 @@ const ConsultSection = () => (
 );
 
 const FaqSection = () => (
-  <section id="faq" className="scroll-mt-24 mb-20">
+  <section id="faq" className="scroll-mt-32 mb-20">
     <h2 className="text-3xl font-bold mb-8">자주하는 질문</h2>
     <div className="bg-white rounded-lg shadow-lg p-8 space-y-6">
       <div className="border-b pb-4">
@@ -125,7 +132,7 @@ const FaqSection = () => (
 );
 
 const LocationSection = () => (
-  <section id="location" className="scroll-mt-24 mb-20">
+  <section id="location" className="scroll-mt-32 mb-20">
     <h2 className="text-3xl font-bold mb-8">오시는 길</h2>
     <div className="bg-white rounded-lg shadow-lg p-8 space-y-6">
       <div className="grid md:grid-cols-2 gap-8">
@@ -170,9 +177,11 @@ const HomePage = () => {
 
   return (
     <div className="bg-gray-50 text-gray-900">
-      <Header />
+      <Header scrollToSection={scrollToSection} />
+      <main className="w-full px-0 py-0">
+        <Home />
+      </main>
       <main className="max-w-screen-lg mx-auto px-4 py-12">
-        {/* <SectionNavigation activeSection={activeSection} scrollToSection={scrollToSection} /> */}
         <QualificationSection />
         <ConsultSection />
         <FaqSection />
