@@ -7,7 +7,7 @@ const sections = [
   { id: 'location', label: '오시는 길' },
 ];
 
-const Header = ({ scrollToSection }: { scrollToSection: (id: string) => void }) => (
+const Header = ({ scrollToSection, activeSection }: { scrollToSection: (id: string) => void; activeSection: string }) => (
   <header className="bg-blue-900 text-white shadow-md sticky top-0 z-50">
     <div className="max-w-screen-lg mx-auto px-4 py-4 flex justify-between items-center">
       <div className="flex items-center gap-2">
@@ -16,7 +16,7 @@ const Header = ({ scrollToSection }: { scrollToSection: (id: string) => void }) 
       <nav className="hidden md:flex space-x-6">
         {sections.map(({ id, label }) => (
           <a key={id} href={`#${id}`} className="text-xl hover:text-blue-300 transition-colors">
-            {label}
+            <span className={activeSection === id ? 'text-blue-300' : ''}>{label}</span>
           </a>
         ))}
       </nav>
@@ -28,7 +28,7 @@ const Home = () => (
   <section id="home" className="relative h-screen flex items-center">
     <div className="absolute inset-0">
       <img
-        src="/pic_home.png"
+        src="/pic_home.webp"
         alt="메인 배경"
         className="w-full h-full object-fill"
       />
@@ -177,7 +177,7 @@ const HomePage = () => {
 
   return (
     <div className="bg-gray-50 text-gray-900">
-      <Header scrollToSection={scrollToSection} />
+      <Header scrollToSection={scrollToSection} activeSection={activeSection} />
       <main className="w-full px-0 py-0">
         <Home />
       </main>
